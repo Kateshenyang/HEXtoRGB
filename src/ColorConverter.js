@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ColorConverter = () => {
   const [hex, setHex] = useState('');
   const [rgb, setRgb] = useState('');
   const [error, setError] = useState('');
 
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setHex(value);
-
-    if (value.length === 7) {
-      if (/^#[0-9A-Fa-f]{6}$/.test(value)) {
-        const r = parseInt(value.slice(1, 3), 16);
-        const g = parseInt(value.slice(3, 5), 16);
-        const b = parseInt(value.slice(5, 7), 16);
+  useEffect(() => {
+    if (hex.length === 7) {
+      if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
         setRgb(`RGB: (${r}, ${g}, ${b})`);
         setError('');
-        document.body.style.backgroundColor = value;
+        document.body.style.backgroundColor = hex;
       } else {
         setError('Ошибка');
         setRgb('Ошибка');
@@ -27,6 +24,11 @@ const ColorConverter = () => {
       setError('');
       document.body.style.backgroundColor = '';
     }
+  }, [hex]);
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setHex(value);
   };
 
   return (
