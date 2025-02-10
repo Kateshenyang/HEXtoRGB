@@ -9,23 +9,32 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.container {
-  text-align: center;
-}
-
-input {
-  width: 300px;
+.hex-input,
+.rgb-output {
+  width: 300px; /* Фиксированная ширина окошек */
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 0;
-  margin: 10px 0;
+  margin: 10px 0; /* Отступ между окошками */
+  box-sizing: border-box; /* Учитываем padding в ширине */
+  text-align: center; /* Текст по центру */
 }
 
-h1 {
-  margin-bottom: 20px;
+.rgb-output {
+  background-color: #f9f9f9; /* Светлый фон для RGB */
+  cursor: not-allowed; /* Курсор "недоступно" */
 }
 
-h2 {
-  margin-top: 20px;
+.error {
+  color: red;
+}
+
+/* Класс для изменения фона страницы */
+.body-bg {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column; /* Окошки друг под другом */
+  justify-content: center;
+  align-items: center;
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './App.css'; // Импортируем стили
 
 const ColorConverter = () => {
   const [hex, setHex] = useState('');
@@ -14,16 +15,16 @@ const ColorConverter = () => {
         const b = parseInt(hex.slice(5, 7), 16);
         setRgb(`RGB: (${r}, ${g}, ${b})`);
         setError('');
-        setBackgroundColor(hex);
+        setBackgroundColor(hex); // Устанавливаем цвет фона
       } else {
         setError('Ошибка');
         setRgb('Ошибка');
-        setBackgroundColor('red');
+        setBackgroundColor('red'); // Устанавливаем красный фон при ошибке
       }
     } else {
       setRgb('');
       setError('');
-      setBackgroundColor('');
+      setBackgroundColor(''); // Сбрасываем фон, если ввод неполный
     }
   }, [hex]);
 
@@ -33,15 +34,17 @@ const ColorConverter = () => {
   };
 
   return (
-    <div style={{ backgroundColor }}>
+    <div className="body-bg" style={{ backgroundColor }}>
       <input
         type="text"
+        className="hex-input"
         value={hex}
         onChange={handleChange}
         placeholder="Введите HEX цвет (например, #FFFFFF)"
       />
-      {rgb && <h2>{rgb}</h2>}
-      {error && <h2 style={{ color: 'red' }}>{error}</h2>}
+      <div className="rgb-output">
+        {rgb || (error ? <span className="error">{error}</span> : 'RGB')}
+      </div>
     </div>
   );
 };
