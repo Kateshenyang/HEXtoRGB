@@ -4,6 +4,7 @@ const ColorConverter = () => {
   const [hex, setHex] = useState('');
   const [rgb, setRgb] = useState('');
   const [error, setError] = useState('');
+  const [backgroundColor, setBackgroundColor] = useState('');
 
   useEffect(() => {
     if (hex.length === 7) {
@@ -13,16 +14,16 @@ const ColorConverter = () => {
         const b = parseInt(hex.slice(5, 7), 16);
         setRgb(`RGB: (${r}, ${g}, ${b})`);
         setError('');
-        document.body.style.backgroundColor = hex;
+        setBackgroundColor(hex);
       } else {
         setError('Ошибка');
         setRgb('Ошибка');
-        document.body.style.backgroundColor = 'red';
+        setBackgroundColor('red');
       }
     } else {
       setRgb('');
       setError('');
-      document.body.style.backgroundColor = '';
+      setBackgroundColor('');
     }
   }, [hex]);
 
@@ -32,7 +33,7 @@ const ColorConverter = () => {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor }}>
       <input
         type="text"
         value={hex}
